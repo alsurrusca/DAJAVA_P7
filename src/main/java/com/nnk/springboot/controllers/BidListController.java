@@ -56,7 +56,11 @@ public class BidListController {
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Bid by Id and to model then show to the form OK (?)
+<<<<<<< Updated upstream
         BidList bidList = bidListService.getById(id);
+=======
+        Optional<BidList> bidList = bidListService.getById(id);
+>>>>>>> Stashed changes
         model.addAttribute("bidList", bidList);
         log.info("Get Bid by ID SUCCESS");
         return "bidList/update";
@@ -70,7 +74,11 @@ public class BidListController {
             log.error("Update BidList FAILED");
             return "bidList/update";
         }
+<<<<<<< Updated upstream
         bidList.setId(id);
+=======
+        bidList.setBidListId(id);
+>>>>>>> Stashed changes
         bidListService.save(bidList);
         model.addAttribute("bidlist", bidListService.findAll());
         log.info("Update BidList SUCCESS");
@@ -80,8 +88,13 @@ public class BidListController {
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list OK
+<<<<<<< Updated upstream
         BidList bidListbyId = bidListService.getById(id);
         bidListService.delete(bidListbyId);
+=======
+        Optional<BidList> bidListbyId =bidListService.getById(id);
+        //bidListService.delete(bidListbyId);
+>>>>>>> Stashed changes
         model.addAttribute("bidList", bidListbyId);
         log.info("Delete BidList SUCCESS");
         return "redirect:/bidList/list";

@@ -18,6 +18,11 @@ public class User {
     @NotBlank(message = "Role is mandatory")
     private String role;
 
+<<<<<<< Updated upstream
+=======
+    public User(){}
+
+>>>>>>> Stashed changes
     public Integer getId() {
         return id;
     }

@@ -8,11 +8,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "rating")
 public class Rating {
-<<<<<<< Updated upstream
-    // TODO: Map columns in data table RATING with corresponding java fields
-=======
 
-    // TODO: Map columns in data table RATING with corresponding java fields
+    // TODO: Map columns in data table RATING with corresponding java fields OK
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,5 +78,4 @@ public class Rating {
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
->>>>>>> Stashed changes
 }

@@ -22,18 +22,10 @@ public class BidListService {
         return bidListRepository.save(bidList);
     }
 
-<<<<<<< Updated upstream
-    public void delete(BidList bidList){
-        bidListRepository.delete(bidList);
-    }
-
-    public Optional<BidList> getById(Integer id) {return bidListRepository.findById(id); }
-=======
     public Optional<BidList> getById(Integer id) {return bidListRepository.findById(id); }
 
     public void delete(BidList bidList) {
         bidListRepository.delete(bidList);
     }
 
->>>>>>> Stashed changes
 }

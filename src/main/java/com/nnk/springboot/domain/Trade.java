@@ -8,10 +8,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "trade")
 public class Trade {
-    // TODO: Map columns in data table TRADE with corresponding java fields
-<<<<<<< Updated upstream
-}
-=======
+    // TODO: Map columns in data table TRADE with corresponding java fields OK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
@@ -256,4 +253,3 @@ public class Trade {
     }
 }
 
->>>>>>> Stashed changes

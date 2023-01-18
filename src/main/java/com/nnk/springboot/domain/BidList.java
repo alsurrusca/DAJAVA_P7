@@ -12,13 +12,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "bidlist")
 public class BidList {
-<<<<<<< Updated upstream
-    public void setId(Integer id) {
-    }
-=======
 
->>>>>>> Stashed changes
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
+    // TODO: Map columns in data table BIDLIST with corresponding java fields OK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bidlist_id")
@@ -32,17 +27,17 @@ public class BidList {
     @NotNull(message = "type is mandatory")
     private String type;
 
-    @Column(name = "bidQuantity", nullable = true)
+    @Column(name = "bidQuantity", nullable = false)
     @NotNull(message = "bidQuantity is mandatory")
     private double bidQuantity;
 
-    @Column(name = "askQuantity", nullable = true)
+    @Column(name = "askQuantity", nullable = false)
     private double askQuantity;
 
-    @Column(name = "bid", nullable = true)
+    @Column(name = "bid", nullable = false)
     private double bid;
 
-    @Column(name = "ask", nullable = true)
+    @Column(name = "ask", nullable = false)
     private double ask;
 
     @Column(name = "benchmark", nullable = true)
@@ -90,15 +85,11 @@ public class BidList {
     @Column(name = "side", nullable = true)
     private String side;
 
-<<<<<<< Updated upstream
-    public BidList(){}
-=======
     public BidList(String account, String type, double bidQuantity){
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
     }
->>>>>>> Stashed changes
 
     public int getBidListId() {
         return bidListId;

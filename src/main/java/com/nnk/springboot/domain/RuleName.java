@@ -7,10 +7,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "rulename")
 public class RuleName {
-    // TODO: Map columns in data table RULENAME with corresponding java fields
-<<<<<<< Updated upstream
-=======
-
+    // TODO: Map columns in data table RULENAME with corresponding java fields OK
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -100,5 +97,4 @@ public class RuleName {
     public void setSqlPart(String sqlPart) {
         this.sqlPart = sqlPart;
     }
->>>>>>> Stashed changes
 }

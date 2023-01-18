@@ -31,12 +31,13 @@ public class BidListController {
     {
         // TODO: call service find all bids to show to the view OK
         List<BidList> findAllBids = bidListService.findAll();
-        model.addAttribute("bidList", findAllBids);
+        model.addAttribute("bidLists", findAllBids);
         log.info("Find all bids SUCCESS");
         return "bidList/list";
     }
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
+        log.info("Add BidList SUCCESS");
         return "bidList/add";
     }
 
@@ -45,7 +46,7 @@ public class BidListController {
         // TODO: check data valid and save to db, after saving return bid list OK
         if(!result.hasErrors()){
             bidListService.save(bid);
-            model.addAttribute("bidlLists", bidListService.findAll());
+            model.addAttribute("bidLists", bidListService.findAll());
             log.info("Save BidList to DB, SUCCESS");
             return "redirect:/bidList/list";
         }
@@ -56,11 +57,7 @@ public class BidListController {
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Bid by Id and to model then show to the form OK (?)
-<<<<<<< Updated upstream
-        BidList bidList = bidListService.getById(id);
-=======
-        Optional<BidList> bidList = bidListService.getById(id);
->>>>>>> Stashed changes
+        BidList bidList = bidListService.getById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
         model.addAttribute("bidList", bidList);
         log.info("Get Bid by ID SUCCESS");
         return "bidList/update";
@@ -74,13 +71,9 @@ public class BidListController {
             log.error("Update BidList FAILED");
             return "bidList/update";
         }
-<<<<<<< Updated upstream
-        bidList.setId(id);
-=======
         bidList.setBidListId(id);
->>>>>>> Stashed changes
         bidListService.save(bidList);
-        model.addAttribute("bidlist", bidListService.findAll());
+        model.addAttribute("bidLists", bidListService.findAll());
         log.info("Update BidList SUCCESS");
         return "redirect:/bidList/list";
     }
@@ -88,13 +81,8 @@ public class BidListController {
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list OK
-<<<<<<< Updated upstream
-        BidList bidListbyId = bidListService.getById(id);
-        bidListService.delete(bidListbyId);
-=======
-        Optional<BidList> bidListbyId =bidListService.getById(id);
+        BidList bidListbyId =bidListService.getById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));;
         //bidListService.delete(bidListbyId);
->>>>>>> Stashed changes
         model.addAttribute("bidList", bidListbyId);
         log.info("Delete BidList SUCCESS");
         return "redirect:/bidList/list";

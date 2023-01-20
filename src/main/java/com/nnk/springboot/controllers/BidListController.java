@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.service.BidListService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +25,16 @@ public class BidListController {
     @Autowired
     private BidListService bidListService;
 
+    @Autowired
+            private BidListRepository bidListRepository;
+
     Logger log = LoggerFactory.getLogger(BidListController.class);
 
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
         // TODO: call service find all bids to show to the view OK
-        List<BidList> findAllBids = bidListService.findAll();
-        model.addAttribute("bidLists", findAllBids);
+        model.addAttribute("bidLists", bidListService.findAll());
         log.info("Find all bids SUCCESS");
         return "bidList/list";
     }
@@ -46,7 +49,7 @@ public class BidListController {
         // TODO: check data valid and save to db, after saving return bid list OK
         if(!result.hasErrors()){
             bidListService.save(bid);
-            model.addAttribute("bidLists", bidListService.findAll());
+            model.addAttribute("bidList", bidListService.findAll());
             log.info("Save BidList to DB, SUCCESS");
             return "redirect:/bidList/list";
         }

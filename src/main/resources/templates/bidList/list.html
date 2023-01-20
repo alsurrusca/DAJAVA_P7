@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="utf-8"/>
 <title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" >
 </head>
 <body>
 <div class="container">
@@ -38,6 +38,18 @@
 			</thead>
 			<tbody>
 				<!-- TODO: Show all Bids to the table, the Action column will have Edit & Delete buttons -->
+				<tr th:each="bidlist : ${bidLists}">
+					<td style="width: 10%" th:text="${bidlist.id}"></td>
+					<td th:text="${bidlist.account}"></td>
+					<td th:text="${bidlist.type}"></td>
+					<td style="width: 25%" th:text="${bidlist.bidQuantity}"></td>
+					<td style="width: 15%" class="text-center">
+						<a th:href="@{/user/update/{id}(id=${user.id})}">Edit</a>&nbsp;|&nbsp;
+						<a th:href="@{/user/delete/{id}(id=${user.id})}">Delete</a>
+					</td>
+				</tr>
+
+			</tr>
 			</tbody>
 		</table>
 	</div>

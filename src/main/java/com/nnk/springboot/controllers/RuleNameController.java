@@ -5,6 +5,8 @@ import com.nnk.springboot.service.RuleNameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -26,11 +29,17 @@ public class RuleNameController {
 
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model) {
+    public String home(Model model, Principal user) {
         // TODO: find all RuleName, add to model OK
         List<RuleName> findAllRuleName = ruleNameService.findAll();
         log.info("Find All ruleName SUCCESS");
         model.addAttribute("ruleNameList", findAllRuleName);
+        if(user instanceof OAuth2AuthenticationToken){
+            model.addAttribute("username", ((OAuth2AuthenticationToken) user).getPrincipal().getAttributes().get("login"));
+        }
+        else if(user instanceof UsernamePasswordAuthenticationToken){
+            model.addAttribute("username", user.getName());
+        }
         return "ruleName/list";
     }
 

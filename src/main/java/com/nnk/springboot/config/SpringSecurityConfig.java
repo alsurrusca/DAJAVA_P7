@@ -6,12 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -22,16 +20,23 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**").authenticated()
-                .antMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/","/login").permitAll()
+                .antMatchers("/user/**").permitAll()
                 .and().formLogin()
                 .defaultSuccessUrl("/bidList/list")
+                .and()
+                .oauth2Login()
                 .and().logout()
                 .logoutUrl("/app-logout")
                 .logoutSuccessUrl("/")
                 .and().exceptionHandling()
-                .accessDeniedPage("/app/error");
+                .accessDeniedPage("/app/error")
+
+
+        ;
+
     }
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

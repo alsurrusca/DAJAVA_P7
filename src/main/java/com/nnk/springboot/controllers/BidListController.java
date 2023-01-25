@@ -6,6 +6,8 @@ import com.nnk.springboot.service.BidListService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,11 +34,18 @@ public class BidListController {
     Logger log = LoggerFactory.getLogger(BidListController.class);
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
+        public String home(Model model, Principal user){
         // TODO: call service find all bids to show to the view OK
-        model.addAttribute("bidLists", bidListService.findAll());
+        List<BidList> bidLists = bidListService.findAll();
+        model.addAttribute("bidlists", bidLists);
         log.info("Find all bids SUCCESS");
+        if(user instanceof OAuth2AuthenticationToken){
+            model.addAttribute("username", ((OAuth2AuthenticationToken) user).getPrincipal().getAttributes().get("login"));
+        }
+        else if(user instanceof UsernamePasswordAuthenticationToken){
+            model.addAttribute("username", user.getName());
+        }
+
         return "bidList/list";
     }
     @GetMapping("/bidList/add")
@@ -49,7 +59,7 @@ public class BidListController {
         // TODO: check data valid and save to db, after saving return bid list OK
         if(!result.hasErrors()){
             bidListService.save(bid);
-            model.addAttribute("bidList", bidListService.findAll());
+            model.addAttribute("bidlists", bidListService.findAll());
             log.info("Save BidList to DB, SUCCESS");
             return "redirect:/bidList/list";
         }
@@ -74,9 +84,9 @@ public class BidListController {
             log.error("Update BidList FAILED");
             return "bidList/update";
         }
-        bidList.setBidListId(id);
+        bidList.setId(id);
         bidListService.save(bidList);
-        model.addAttribute("bidLists", bidListService.findAll());
+        model.addAttribute("bidlists", bidListService.findAll());
         log.info("Update BidList SUCCESS");
         return "redirect:/bidList/list";
     }
@@ -85,7 +95,7 @@ public class BidListController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Bid by Id and delete the bid, return to Bid list OK
         BidList bidListbyId =bidListService.getById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));;
-        //bidListService.delete(bidListbyId);
+        bidListService.delete(bidListbyId);
         model.addAttribute("bidList", bidListbyId);
         log.info("Delete BidList SUCCESS");
         return "redirect:/bidList/list";

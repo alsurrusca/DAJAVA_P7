@@ -1,13 +1,13 @@
 # DAJAVA_P7
  Projet 7 pour la formation de développeur d'application Java
 
-#titre Prerequisites :
+# Prerequisites :
 
 Java version 8
 Maven 
 Mysql 
 
-#titre Run Application 
+# Run Application 
 
 Package app : In main folder use the following command
 

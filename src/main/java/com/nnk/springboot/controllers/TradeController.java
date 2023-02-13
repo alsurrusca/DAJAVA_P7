@@ -45,7 +45,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String add(Trade bid) {
         log.info("Add User SUCCESS");
         return "trade/add";
     }

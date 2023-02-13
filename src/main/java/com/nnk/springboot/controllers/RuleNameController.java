@@ -15,15 +15,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
+
 @Controller
 public class RuleNameController {
-    // TODO: Inject RuleName service OK
+    // TODO: Inject RuleName service
+    @Resource(name = "ruleNameService")
     @Autowired
     private RuleNameService ruleNameService;
+
+
 
     Logger log = LoggerFactory.getLogger(RatingController.class);
 

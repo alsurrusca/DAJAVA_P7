@@ -20,14 +20,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**").authenticated()
-                .antMatchers("/user/**").permitAll()
+                .antMatchers("/user/**").authenticated()
+                .antMatchers("/home").permitAll()
                 .and().formLogin()
                 .defaultSuccessUrl("/bidList/list")
                 .and()
                 .oauth2Login()
                 .and().logout()
                 .logoutUrl("/app-logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/login")
                 .and().exceptionHandling()
                 .accessDeniedPage("/app/error")
 

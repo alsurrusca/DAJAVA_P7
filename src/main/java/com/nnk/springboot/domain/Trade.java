@@ -84,6 +84,7 @@ public class Trade {
 
     }
 
+
     public Integer getTradeId() {
         return tradeId;
     }

@@ -42,6 +42,12 @@ public class RuleName {
         this.sqlPart = sqlPart;
     }
 
+    public RuleName(int i, String exemple1, String account) {
+        this.id = i;
+        this.description = exemple1;
+        this.name = account;
+    }
+
     public Integer getId() {
         return id;
     }

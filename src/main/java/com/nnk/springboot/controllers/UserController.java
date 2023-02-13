@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.service.BidListService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import javax.validation.Valid;
 
 @Controller
 public class UserController {
+
+
     @Autowired
     private UserRepository userRepository;
 
@@ -85,4 +88,6 @@ public class UserController {
         log.info("Delete user SUCCESS");
         return "redirect:/user/list";
     }
+
+
 }

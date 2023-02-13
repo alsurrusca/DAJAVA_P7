@@ -1,5 +1,8 @@
 # DAJAVA_P7
  Projet 7 pour la formation de développeur d'application Java
+ 
+ A financial stock application. The project is about to finish and make fonctionnal application. 
+ The project works whit Thymeleaf we could able to create, update and delete.
 
 # Prerequisites :
 
